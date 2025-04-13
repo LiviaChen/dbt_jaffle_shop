@@ -1,6 +1,6 @@
 {{ config(materialized="table")}}
-with customers as (select * from dbt-tutorial.jaffle_shop.customers), 
-orders as (select * from dbt-tutorial.jaffle_shop.orders),
+with customers as (select * from {{ ref('stg_customers') }}), 
+orders as (select * from {{ ref('stg_orders') }}),
 orders_grouped_by_customer_id as (
     select user_id,
     count(id) as number_of_orders
